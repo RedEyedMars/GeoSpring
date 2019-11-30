@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package hello;
+package com.redeyedmars.app;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,11 +24,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.redeyedmars.app.service.ChatController;
+
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = GreetingController.class)
+@WebMvcTest(controllers = ChatController.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
 public class ApplicationTest {
 
     @Autowired
@@ -38,9 +42,9 @@ public class ApplicationTest {
     public void homePage() throws Exception {
         // N.B. jsoup can be useful for asserting HTML content
         mockMvc.perform(get("/index.html"))
-                .andExpect(content().string(containsString("Get your greeting")));
+                .andExpect(content().string(containsString("Start Chatting")));
     }
-
+/*
     @Test
     public void greeting() throws Exception {
         mockMvc.perform(get("/greeting"))
@@ -52,5 +56,5 @@ public class ApplicationTest {
         mockMvc.perform(get("/greeting").param("name", "Greg"))
                 .andExpect(content().string(containsString("Hello, Greg!")));
     }
-
+*/
 }
